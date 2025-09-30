@@ -1,0 +1,28 @@
+actions:
+  - name: script_generate
+    command: python scripts/scriptgen.py --payload "${input.json}"
+    returns: json
+
+  - name: tts_generate
+    command: python scripts/tts.py --text "${prev.script_text}" --lang "${input.sprache}" --voice "${input.stimme}"
+    returns: path
+
+  - name: video_edit
+    command: python scripts/edit.py --payload "${input.json}" --script "${prev.script_json}" --voice "${prev2.voice_path}" --out "out/video_raw.mp4"
+    returns: path
+
+  - name: subs_build
+    command: python scripts/subs.py --in "out/video_raw.mp4" --lang "${input.sprache}" --out "out/subs.srt"
+    returns: path
+
+  - name: subs_burnin
+    command: python scripts/burnin.py --video "out/video_raw.mp4" --srt "out/subs.srt" --out "out/video_final.mp4"
+    returns: path
+
+  - name: qc_normalize
+    command: python scripts/loudnorm.py --in "out/video_final.mp4" --out "out/video_final_norm.mp4"
+    returns: path
+
+  - name: tiktok_publish
+    command: python scripts/publish_tiktok.py --video "out/video_final_norm.mp4" --caption "${prev.caption}" --hashtags "${prev.hashtags_csv}"
+    returns: json

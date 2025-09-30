@@ -1,0 +1,61 @@
+workflow:
+  name: make_tiktok
+  input_schema:
+    type: object
+    required: [kernbotschaft]
+    properties:
+      ziel: {type: string, default: "Mini-Tutorial"}
+      kernbotschaft: {type: string}
+      laengeSek: {type: integer, default: 25}
+      tonalitaet: {type: string, default: "locker"}
+      zielgruppe: {type: string, default: "16-34"}
+      cta: {type: string, default: "Folgen für mehr!"}
+      sprache: {type: string, default: "de"}
+      stimme: {type: string, default: "neutral"}
+      assets: {type: array, items: {type: string}, default: []}
+      hashtagSeeds: {type: array, items: {type: string}, default: []}
+      publish: {type: boolean, default: false}
+  steps:
+    - id: script
+      action: script_generate
+      with:
+        payload: "${input}"
+    - id: tts
+      action: tts_generate
+      with:
+        text: "${steps.script.output.hook} " + "${steps.script.output.bullets.join(' ')} " + "${steps.script.output.cta}"
+        lang: "${input.sprache}"
+        voice: "${input.stimme}"
+    - id: edit
+      action: video_edit
+      with:
+        payload: "${input}"
+        script: "${steps.script.output}"
+        voice: "${steps.tts.output}"
+    - id: subs
+      action: subs_build
+      with:
+        in: "${steps.edit.output}"
+    - id: burn
+      action: subs_burnin
+      with:
+        video: "${steps.edit.output}"
+        srt: "${steps.subs.output}"
+    - id: norm
+      action: qc_normalize
+      with:
+        in: "${steps.burn.output}"
+    - id: publish
+      if: "${input.publish == true}"
+      action: tiktok_publish
+      with:
+        video: "${steps.norm.output}"
+        caption: "${input.kernbotschaft} — ${input.cta}"
+        hashtags: "${input.hashtagSeeds.join(' ')}"
+  output:
+    script: "${steps.script.output}"
+    video_path: "${steps.norm.output}"
+    caption: "${input.kernbotschaft} — ${input.cta}"
+    hashtags: "${input.hashtagSeeds}"
+    export_params: {"res":"1080x1920","fps":30,"codec":"h264","bitrate":"8M"}
+    tiktok_status: "${steps.publish.output || {'status':'not_published'}}"
