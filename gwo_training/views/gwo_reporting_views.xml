@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="view_gwo_result_pivot" model="ir.ui.view">
+            <field name="name">gwo.user.result.pivot</field>
+            <field name="model">gwo.user.result</field>
+            <field name="arch" type="xml">
+                <pivot string="Learner Progress">
+                    <field name="score" type="measure"/>
+                    <field name="status" type="row"/>
+                    <field name="content_id" type="col"/>
+                    <field name="enrollment_id" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_gwo_result_graph" model="ir.ui.view">
+            <field name="name">gwo.user.result.graph</field>
+            <field name="model">gwo.user.result</field>
+            <field name="arch" type="xml">
+                <graph string="Quiz Scores" type="bar">
+                    <field name="score" type="measure"/>
+                    <field name="content_id" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_gwo_enrollment_graph" model="ir.ui.view">
+            <field name="name">gwo.enrollment.graph</field>
+            <field name="model">gwo.enrollment</field>
+            <field name="arch" type="xml">
+                <graph string="Pass Rate by Month" type="line">
+                    <field name="passed" type="measure" string="Pass Count"/>
+                    <field name="last_activity" interval="month" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="action_gwo_reporting_results" model="ir.actions.act_window">
+            <field name="name">Analytics</field>
+            <field name="res_model">gwo.user.result</field>
+            <field name="view_mode">pivot,graph,tree</field>
+            <field name="view_id" ref="view_gwo_result_pivot"/>
+            <field name="context">{'search_default_status_done': 1}</field>
+        </record>
+
+        <menuitem id="menu_gwo_analytics" name="Analytics" parent="menu_gwo_training_root" action="action_gwo_reporting_results" sequence="50" groups="gwo_training.group_gwo_training_manager"/>
+    </data>
+</odoo>
