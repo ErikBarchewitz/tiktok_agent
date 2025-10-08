@@ -1,0 +1,280 @@
+<odoo>
+    <data noupdate="0">
+        <record id="survey_wah_mh_quiz" model="survey.survey">
+            <field name="title">GWO WaH + MH Knowledge Check</field>
+            <field name="description">Formative quiz covering safe working at height and manual handling checkpoints.</field>
+            <field name="scoring_type">with_scoring</field>
+            <field name="access_mode">token</field>
+            <field name="question_time_limit">0</field>
+            <field name="quizz_mode">on</field>
+            <field name="quizz_score_min">80</field>
+        </record>
+
+        <record id="survey_wah_mh_final" model="survey.survey">
+            <field name="title">GWO BSTR WaH + MH Final Exam</field>
+            <field name="description">Summative assessment covering working at heights refresher and positive manual handling behaviours.</field>
+            <field name="scoring_type">with_scoring</field>
+            <field name="quizz_mode">on</field>
+            <field name="access_mode">token</field>
+            <field name="quizz_score_min">80</field>
+        </record>
+
+        <!-- Quiz questions -->
+        <record id="survey_question_precheck" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_quiz"/>
+            <field name="title">Was ist vor Steigbeginn zu prüfen?</field>
+            <field name="question_type">simple_choice</field>
+            <field name="is_required" eval="True"/>
+        </record>
+        <record id="survey_question_precheck_answer1" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_precheck"/>
+            <field name="value">PPE Sichtprüfung vollständig</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_question_precheck_answer2" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_precheck"/>
+            <field name="value">Nur ob der Helm sitzt</field>
+        </record>
+        <record id="survey_question_precheck_answer3" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_precheck"/>
+            <field name="value">Ob das Werkzeug sortiert ist</field>
+        </record>
+
+        <record id="survey_question_anchor" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_quiz"/>
+            <field name="title">Mindestanforderung an Anschlagpunkte?</field>
+            <field name="question_type">simple_choice</field>
+            <field name="is_required" eval="True"/>
+        </record>
+        <record id="survey_question_anchor_answer1" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_anchor"/>
+            <field name="value">Mindestens 12 kN je Benutzer</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_question_anchor_answer2" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_anchor"/>
+            <field name="value">Beliebiger Leitersprossenhalter</field>
+        </record>
+
+        <record id="survey_question_dropped" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_quiz"/>
+            <field name="title">Welche Maßnahmen helfen, Dropped Objects zu vermeiden?</field>
+            <field name="question_type">multiple_choice</field>
+            <field name="is_required" eval="True"/>
+        </record>
+        <record id="survey_question_dropped_answer1" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_dropped"/>
+            <field name="value">Werkzeugleinen nutzen</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_question_dropped_answer2" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_dropped"/>
+            <field name="value">Arbeitsbereich sichern</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_question_dropped_answer3" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_dropped"/>
+            <field name="value">Werkzeug lose in Taschen stecken</field>
+        </record>
+
+        <record id="survey_question_rescue" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_quiz"/>
+            <field name="title">Ordne die Schritte einer Grundrettung.</field>
+            <field name="question_type">ranking</field>
+            <field name="is_required" eval="True"/>
+        </record>
+        <record id="survey_question_rescue_answer1" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_rescue"/>
+            <field name="value">Absperren</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="survey_question_rescue_answer2" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_rescue"/>
+            <field name="value">Eigenschutz</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="survey_question_rescue_answer3" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_rescue"/>
+            <field name="value">Kommunikation</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="survey_question_rescue_answer4" model="survey.question.answer">
+            <field name="question_id" ref="survey_question_rescue"/>
+            <field name="value">Sicherung &amp; Rettung</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="survey_question_mh_signs" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_quiz"/>
+            <field name="title">Nenne zwei Anzeichen muskuloskelettaler Belastung.</field>
+            <field name="question_type">textbox</field>
+            <field name="is_required" eval="True"/>
+        </record>
+
+        <!-- Final exam representative subset of questions -->
+        <record id="survey_final_q1" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Welche täglichen Kontrollen gehören zur Sichtprüfung der persönlichen Schutzausrüstung?</field>
+            <field name="question_type">multiple_choice</field>
+            <field name="is_required" eval="True"/>
+            <field name="topic">wah</field>
+        </record>
+        <record id="survey_final_q1_a1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q1"/>
+            <field name="value">Karabiner und Verbindungsmittel auf Verschleiß prüfen</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q1_a2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q1"/>
+            <field name="value">Farbe der PSA an Tageslicht angleichen</field>
+        </record>
+        <record id="survey_final_q1_a3" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q1"/>
+            <field name="value">Körperliche Fitness dokumentieren</field>
+        </record>
+
+        <record id="survey_final_q2" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Welche Technik ist geeignet, um eine 25 kg-Nabe über 10 m zu bewegen?</field>
+            <field name="question_type">simple_choice</field>
+            <field name="topic">mh</field>
+        </record>
+        <record id="survey_final_q2_a1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q2"/>
+            <field name="value">Team-Lift mit synchronem Schritt und klarer Kommunikation</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q2_a2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q2"/>
+            <field name="value">Alleiniger Rückenlift mit gebeugten Knien</field>
+        </record>
+
+        <record id="survey_final_q3" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Ordne die Phasen einer Rettung aus der Höhe.</field>
+            <field name="question_type">ranking</field>
+            <field name="topic">wah</field>
+        </record>
+        <record id="survey_final_q3_a1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q3"/>
+            <field name="value">Lage sichern</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="survey_final_q3_a2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q3"/>
+            <field name="value">Notruf &amp; Kommunikation</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="survey_final_q3_a3" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q3"/>
+            <field name="value">Zugang schaffen</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="survey_final_q3_a4" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q3"/>
+            <field name="value">Rettung durchführen</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="survey_final_q4" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Welche Aussagen zur ergonomischen Arbeitshaltung treffen zu?</field>
+            <field name="question_type">multiple_choice</field>
+            <field name="topic">mh</field>
+        </record>
+        <record id="survey_final_q4_a1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q4"/>
+            <field name="value">Last nah am Körper halten</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q4_a2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q4"/>
+            <field name="value">Rotationsbewegungen vermeiden</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q4_a3" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q4"/>
+            <field name="value">Kraft aus dem Rücken statt aus den Beinen</field>
+        </record>
+
+        <record id="survey_final_q5" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Beschreibe zwei Maßnahmen zur Rettungsbereitschaft.</field>
+            <field name="question_type">textbox</field>
+            <field name="topic">wah</field>
+        </record>
+
+        <record id="survey_final_q6" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Welche Dokumentation ist nach einer Rettung zwingend zu erstellen?</field>
+            <field name="question_type">simple_choice</field>
+            <field name="topic">wah</field>
+        </record>
+        <record id="survey_final_q6_a1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q6"/>
+            <field name="value">Einsatzbericht mit Lessons Learned</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q6_a2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q6"/>
+            <field name="value">Nur eine SMS an den Vorgesetzten</field>
+        </record>
+
+        <record id="survey_final_q7" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Welches Hilfsmittel reduziert das Risiko bei häufigem Heben?</field>
+            <field name="question_type">simple_choice</field>
+            <field name="topic">mh</field>
+        </record>
+        <record id="survey_final_q7_a1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q7"/>
+            <field name="value">Verstellbare Hebezeuge oder Rollwagen verwenden</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q7_a2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q7"/>
+            <field name="value">Zusätzliches Gewicht anbringen</field>
+        </record>
+
+        <record id="survey_final_q8" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Bewerte die passende Absturzsicherung für Arbeiten an der Nabe.</field>
+            <field name="question_type">matrix</field>
+            <field name="matrix_subtype">simple_choice</field>
+            <field name="topic">wah</field>
+        </record>
+        <record id="survey_final_q8_row1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q8"/>
+            <field name="value">Kurzzeitiger Aufenthalt</field>
+        </record>
+        <record id="survey_final_q8_row2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q8"/>
+            <field name="value">Lange Wartungstätigkeit</field>
+        </record>
+        <record id="survey_final_q8_col1" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q8"/>
+            <field name="value">Temporäres Seitenschutzsystem</field>
+            <field name="matrix_is_column" eval="True"/>
+            <field name="is_correct" eval="True"/>
+        </record>
+        <record id="survey_final_q8_col2" model="survey.question.answer">
+            <field name="question_id" ref="survey_final_q8"/>
+            <field name="value">Persönliches Auffangsystem</field>
+            <field name="matrix_is_column" eval="True"/>
+        </record>
+
+        <record id="survey_final_q9" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Welche Kommunikation ist beim Team-Lift entscheidend?</field>
+            <field name="question_type">textbox</field>
+            <field name="topic">mh</field>
+        </record>
+
+        <record id="survey_final_q10" model="survey.question">
+            <field name="survey_id" ref="survey_wah_mh_final"/>
+            <field name="title">Nenne zwei Kontrollen vor Nutzung eines Steigschutzsystems.</field>
+            <field name="question_type">textbox</field>
+            <field name="topic">wah</field>
+        </record>
+    </data>
+</odoo>

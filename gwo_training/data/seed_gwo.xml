@@ -1,0 +1,182 @@
+<odoo>
+    <data noupdate="0">
+        <record id="slide_channel_gwo_bstr" model="slide.channel">
+            <field name="name">Working at Heights Refresher + Manual Handling Refresher (GWO BSTR)</field>
+            <field name="description">Dieser kombinierte Kurs vermittelt aktuelle Sicherheitsanforderungen für Arbeiten in der Höhe und ergonomische Handhabung gemäß GWO BSTR Standard.</field>
+            <field name="is_published" eval="True"/>
+            <field name="allow_comment" eval="True"/>
+            <field name="enroll" eval="'invite'"/>
+        </record>
+
+        <record id="gwo_course_bstr" model="gwo.course">
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="gwo_domain">offshore</field>
+            <field name="category">refresher</field>
+            <field name="validity_months">24</field>
+            <field name="passing_score">80</field>
+            <field name="final_exam_id" ref="gwo_training.survey_wah_mh_final"/>
+            <field name="certificate_template_id" ref="gwo_training.action_report_gwo_certificate"/>
+        </record>
+
+        <!-- Slides -->
+        <record id="slide_intro" model="slide.slide">
+            <field name="name">Kursintro</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">infographic</field>
+            <field name="description">Überblick über Lernziele: PSA-Kompetenz, Risikowahrnehmung, Rettungsbereitschaft und ergonomisches Verhalten.</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="slide_ppe" model="slide.slide">
+            <field name="name">PPE Grundlagen</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">document</field>
+            <field name="description">Aktualisierte Anforderungen an Auffanggurte, Verbindungsmittel und Rettungssysteme.</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="slide_hazards" model="slide.slide">
+            <field name="name">Gefährdungen &amp; Risikoerkennung</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">infographic</field>
+            <field name="description">Fokus auf dynamische Risikobeurteilung, Wetter, Anlagenstatus und Kommunikation.</field>
+            <field name="sequence">3</field>
+        </record>
+        <record id="slide_anchor" model="slide.slide">
+            <field name="name">Anschlagpunkte &amp; Steigschutz</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">infographic</field>
+            <field name="description">Visualisierung geeigneter Anschlagpunkte, Mindestlasten und Leiternutzung.</field>
+            <field name="sequence">4</field>
+        </record>
+        <record id="slide_rescue" model="slide.slide">
+            <field name="name">Rettungsgrundlagen</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">presentation</field>
+            <field name="description">Szenarienbasierte Rettungspläne, Rollenverteilung und Nachsorge.</field>
+            <field name="sequence">5</field>
+        </record>
+        <record id="slide_dropped" model="slide.slide">
+            <field name="name">Dropped Objects vermeiden</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">infographic</field>
+            <field name="description">Barrierestrategien, Werkzeugmanagement und Kontrollzonen.</field>
+            <field name="sequence">6</field>
+        </record>
+        <record id="slide_ergonomics" model="slide.slide">
+            <field name="name">Ergonomie &amp; Positive Manual Handling</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">presentation</field>
+            <field name="description">Sichere Körperhaltung, koordiniertes Team-Lifting, Nutzung technischer Hilfen.</field>
+            <field name="sequence">7</field>
+        </record>
+        <record id="slide_planning" model="slide.slide">
+            <field name="name">Planung &amp; Alternativen zum Heben</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">webpage</field>
+            <field name="url">https://globalwindsafety.org/manual-handling-alternatives</field>
+            <field name="description">Planungsprinzipien für Lastreduktion, Wegeführung und Hilfsmittel.</field>
+            <field name="sequence">8</field>
+        </record>
+        <record id="slide_quiz" model="slide.slide">
+            <field name="name">Zwischen-Quiz WaH + MH</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">quiz</field>
+            <field name="survey_id" ref="gwo_training.survey_wah_mh_quiz"/>
+            <field name="sequence">9</field>
+        </record>
+        <record id="slide_video" model="slide.slide">
+            <field name="name">Praxisvideo: Doppelhakentechnik</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">video</field>
+            <field name="url">https://example.com/videos/gwo-twin-lanyards</field>
+            <field name="description">Demonstration des sicheren Einsatzes von Doppelhaken in einer Gondel.</field>
+            <field name="sequence">10</field>
+        </record>
+        <record id="slide_final_intro" model="slide.slide">
+            <field name="name">Abschlusstest Hinweis</field>
+            <field name="channel_id" ref="slide_channel_gwo_bstr"/>
+            <field name="slide_type">infographic</field>
+            <field name="description">Hinweise zur Prüfungsvorbereitung, Mindestscore 80 %, Zeitplanung 45 Minuten.</field>
+            <field name="sequence">11</field>
+        </record>
+
+        <!-- Content delegation -->
+        <record id="gwo_content_intro" model="gwo.content">
+            <field name="slide_id" ref="slide_intro"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">text</field>
+            <field name="estimated_minutes">5</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_ppe" model="gwo.content">
+            <field name="slide_id" ref="slide_ppe"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">presentation</field>
+            <field name="estimated_minutes">10</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_hazards" model="gwo.content">
+            <field name="slide_id" ref="slide_hazards"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">text</field>
+            <field name="estimated_minutes">10</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_anchor" model="gwo.content">
+            <field name="slide_id" ref="slide_anchor"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">image</field>
+            <field name="estimated_minutes">10</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_rescue" model="gwo.content">
+            <field name="slide_id" ref="slide_rescue"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">presentation</field>
+            <field name="estimated_minutes">15</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_dropped" model="gwo.content">
+            <field name="slide_id" ref="slide_dropped"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">text</field>
+            <field name="estimated_minutes">8</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_ergonomics" model="gwo.content">
+            <field name="slide_id" ref="slide_ergonomics"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">presentation</field>
+            <field name="estimated_minutes">12</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_planning" model="gwo.content">
+            <field name="slide_id" ref="slide_planning"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">link</field>
+            <field name="estimated_minutes">8</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_quiz" model="gwo.content">
+            <field name="slide_id" ref="slide_quiz"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">quiz</field>
+            <field name="estimated_minutes">10</field>
+            <field name="related_quiz_id" ref="gwo_training.survey_wah_mh_quiz"/>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_video" model="gwo.content">
+            <field name="slide_id" ref="slide_video"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">video</field>
+            <field name="estimated_minutes">6</field>
+            <field name="is_mandatory" eval="True"/>
+        </record>
+        <record id="gwo_content_final_intro" model="gwo.content">
+            <field name="slide_id" ref="slide_final_intro"/>
+            <field name="course_id" ref="gwo_course_bstr"/>
+            <field name="content_type">text</field>
+            <field name="estimated_minutes">4</field>
+            <field name="is_mandatory" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gwo_course_manager,gwo.course manager access,model_gwo_course,gwo_training.group_gwo_training_manager,1,1,1,1
+access_gwo_course_instructor,gwo.course instructor access,model_gwo_course,gwo_training.group_gwo_training_instructor,1,1,1,0
+access_gwo_course_user,gwo.course user access,model_gwo_course,gwo_training.group_gwo_training_user,1,0,0,0
+access_gwo_content_manager,gwo.content manager access,model_gwo_content,gwo_training.group_gwo_training_manager,1,1,1,1
+access_gwo_content_instructor,gwo.content instructor access,model_gwo_content,gwo_training.group_gwo_training_instructor,1,1,1,0
+access_gwo_content_user,gwo.content user access,model_gwo_content,gwo_training.group_gwo_training_user,1,0,0,0
+access_gwo_enrollment_manager,gwo.enrollment manager access,model_gwo_enrollment,gwo_training.group_gwo_training_manager,1,1,1,1
+access_gwo_enrollment_instructor,gwo.enrollment instructor access,model_gwo_enrollment,gwo_training.group_gwo_training_instructor,1,1,0,0
+access_gwo_enrollment_user,gwo.enrollment user access,model_gwo_enrollment,gwo_training.group_gwo_training_user,1,1,0,0
+access_gwo_user_result_manager,gwo.user.result manager access,model_gwo_user_result,gwo_training.group_gwo_training_manager,1,1,1,1
+access_gwo_user_result_instructor,gwo.user.result instructor access,model_gwo_user_result,gwo_training.group_gwo_training_instructor,1,1,0,0
+access_gwo_user_result_user,gwo.user.result user access,model_gwo_user_result,gwo_training.group_gwo_training_user,1,0,0,0
+access_gwo_launch_exam_wizard,gwo.launch.exam.wizard access,model_gwo_launch_exam_wizard,gwo_training.group_gwo_training_instructor,1,1,1,1
+access_gwo_launch_exam_wizard_manager,gwo.launch.exam.wizard manager access,model_gwo_launch_exam_wizard,gwo_training.group_gwo_training_manager,1,1,1,1

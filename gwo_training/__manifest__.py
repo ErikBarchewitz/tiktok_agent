@@ -1,0 +1,20 @@
+{
+    'name': 'GWO Training Suite',
+    'version': '18.0.1.0.0',
+    'category': 'Website/eLearning',
+    'summary': 'Combined GWO refresher training with eLearning and survey-based assessments.',
+    'depends': ['website', 'website_slides', 'survey'],
+    'data': [
+        'security/ir.model.access.csv',
+        'security/rules.xml',
+        'views/gwo_course_views.xml',
+        'views/gwo_content_views.xml',
+        'views/gwo_reporting_views.xml',
+        'report/certificate_qweb.xml',
+        'data/survey_quizzes.xml',
+        'data/seed_gwo.xml',
+    ],
+    'demo': [],
+    'application': True,
+    'license': 'LGPL-3',
+}
