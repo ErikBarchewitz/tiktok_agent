@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <template id="assets_frontend" inherit_id="website_slides.assets_frontend" name="Disable eLearning karma frontend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/elearning_no_gamification/static/src/scss/no_karma.scss"/>
+            </xpath>
+        </template>
+        <template id="assets_backend" inherit_id="web.assets_backend" name="Disable eLearning karma backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" type="text/scss" href="/elearning_no_gamification/static/src/scss/no_karma.scss"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

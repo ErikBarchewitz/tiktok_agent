@@ -1,0 +1,32 @@
+/* Frontend overrides to hide karma related UI. */
+.o_wslides_js_course_karma,
+.o_wslides_js_slide_karma,
+.o_wslides_karma_badges,
+.o_wslides_karma_leaderboard,
+.o_wslides_karma_box,
+.o_wslides_karma_progress,
+.o_wslides_karma_rank,
+.o_wslides_js_course_rank,
+.o_wslides_js_course_karma_gain,
+.o_wslides_course_awards,
+.o_wslides_course_karma,
+.o_wslides_slide_karma,
+.o_wslides_sidebar_badges,
+.o_wslides_leaderboard,
+.o_wslides_js_profile_karma,
+.o_wslides_js_karmaboard,
+.o_wslides_js_member_karma,
+.o_wslides_js_like_score,
+.o_wslides_js_karma_counter,
+.o_wslides_course_top .o_wslides_crowns,
+.o_survey_karma_notification,
+.o_survey_karma_badge {
+    display: none !important;
+}
+
+/* Backend hide karma fields and badges. */
+.o_form_view [data-name*="karma"],
+.o_form_view .o_field_widget[name*="karma"],
+.o_form_view .o_field_widget[name*="karma"] ~ .o_form_label {
+    display: none !important;
+}
