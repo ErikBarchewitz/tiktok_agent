@@ -1,0 +1,40 @@
+<odoo>
+    <record id="view_slide_content_template_list" model="ir.ui.view">
+        <field name="name">slide.content.template.list</field>
+        <field name="model">slide.content.template</field>
+        <field name="arch" type="xml">
+            <list string="Inhaltsvorlagen">
+                <field name="name"/>
+                <field name="slide_type"/>
+                <field name="estimated_duration" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_slide_content_template_form" model="ir.ui.view">
+        <field name="name">slide.content.template.form</field>
+        <field name="model">slide.content.template</field>
+        <field name="arch" type="xml">
+            <form string="Inhaltsvorlage">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="slide_type"/>
+                        <field name="estimated_duration"/>
+                    </group>
+                    <notebook>
+                        <page string="Beschreibung">
+                            <field name="description" widget="text"/>
+                        </page>
+                        <page string="Inhalt">
+                            <field name="body_html"/>
+                        </page>
+                        <page string="Tags">
+                            <field name="tag_ids" widget="many2many_tags"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
