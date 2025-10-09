@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="course_tag_starter" model="course.course.tag">
+        <field name="name">Starter</field>
+        <field name="color">3</field>
+    </record>
+    <record id="course_tag_advanced" model="course.course.tag">
+        <field name="name">Fortgeschritten</field>
+        <field name="color">5</field>
+    </record>
+    <record id="course_tag_team" model="course.course.tag">
+        <field name="name">Team</field>
+        <field name="color">8</field>
+    </record>
+
+    <record id="course_template_welcome" model="course.content.template">
+        <field name="name">Willkommen &amp; Erwartungen</field>
+        <field name="content_type">document</field>
+        <field name="default_duration">10</field>
+        <field name="description"><![CDATA[
+            <p>Stellen Sie sich vor, fassen Sie das Ziel des Kurses zusammen und beschreiben Sie, wie die Teilnehmenden Erfolg haben.</p>
+        ]]></field>
+        <field name="is_recommended">True</field>
+        <field name="tag_ids" eval="[(4, ref('course_tag_starter'))]" />
+    </record>
+
+    <record id="course_template_video_deepdive" model="course.content.template">
+        <field name="name">Video Deep Dive</field>
+        <field name="content_type">video</field>
+        <field name="default_duration">20</field>
+        <field name="description"><![CDATA[
+            <p>Nutzen Sie ein hochwertiges Lernvideo und ergänzen Sie es mit einer kurzen Reflexionsfrage.</p>
+        ]]></field>
+        <field name="resource_url">https://example.com/video</field>
+        <field name="tag_ids" eval="[(4, ref('course_tag_advanced'))]" />
+    </record>
+
+    <record id="course_template_quiz_retro" model="course.content.template">
+        <field name="name">Reflexionsfragen</field>
+        <field name="content_type">quiz</field>
+        <field name="default_duration">15</field>
+        <field name="description"><![CDATA[
+            <p>Fragen Sie nach dem wichtigsten Lernerfolg, offenen Fragen und den nächsten Schritten.</p>
+        ]]></field>
+        <field name="is_recommended">True</field>
+        <field name="tag_ids" eval="[(4, ref('course_tag_team'))]" />
+    </record>
+
+    <record id="course_template_template_pack" model="course.content.template">
+        <field name="name">Template Baukasten</field>
+        <field name="content_type">template</field>
+        <field name="description"><![CDATA[
+            <p>Bereitgestellte Dokumentenvorlagen mit Layout-Empfehlungen für Kursmaterialien.</p>
+        ]]></field>
+        <field name="is_recommended">True</field>
+        <field name="tag_ids" eval="[(6, 0, [ref('course_tag_starter'), ref('course_tag_team')])]" />
+    </record>
+</odoo>
