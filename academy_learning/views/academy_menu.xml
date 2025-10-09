@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <menuitem id="academy_learning_root_menu" name="Academy Learning" sequence="10" groups="academy_learning.group_academy_user,academy_learning.group_academy_admin"/>
-
-    <menuitem id="academy_learning_courses_menu" name="Kurse" parent="academy_learning_root_menu" action="academy_learning.academy_course_action" sequence="10"/>
-    <menuitem id="academy_learning_lessons_menu" name="Lektionen" parent="academy_learning_root_menu" action="academy_learning.academy_lesson_action" sequence="20"/>
-    <menuitem id="academy_learning_quizzes_menu" name="Quizze" parent="academy_learning_root_menu" action="academy_learning.academy_quiz_action" sequence="30"/>
-    <menuitem id="academy_learning_enrollments_menu" name="Einschreibungen" parent="academy_learning_root_menu" action="academy_learning.academy_enrollment_action" sequence="40" groups="academy_learning.group_academy_admin"/>
-</odoo>
