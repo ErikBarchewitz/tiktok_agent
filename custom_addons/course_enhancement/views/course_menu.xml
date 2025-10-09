@@ -1,0 +1,24 @@
+<odoo>
+    <record id="action_course_channel" model="ir.actions.act_window">
+        <field name="name">Kurse</field>
+        <field name="res_model">slide.channel</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="context">{"search_default_my_channel": 1}</field>
+    </record>
+
+    <record id="action_course_partner_progress" model="ir.actions.act_window">
+        <field name="name">Teilnehmerfortschritt</field>
+        <field name="res_model">slide.channel.partner</field>
+        <field name="view_mode">list,form,kanban</field>
+    </record>
+
+    <record id="action_slide_content_template" model="ir.actions.act_window">
+        <field name="name">Inhaltsvorlagen</field>
+        <field name="res_model">slide.content.template</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_course_root" name="Course Studio" sequence="10"/>
+    <menuitem id="menu_course_courses" name="Kurse" parent="menu_course_root" action="action_course_channel" sequence="10"/>
+    <menuitem id="menu_course_templates" name="Inhaltsvorlagen" parent="menu_course_root" action="action_slide_content_template" sequence="20"/>
+</odoo>
