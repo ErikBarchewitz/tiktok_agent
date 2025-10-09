@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_slide_channel_form_academy" model="ir.ui.view">
+        <field name="name">slide.channel.form.academy</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/notebook" position="inside">
+                <page name="academy" string="Academy" groups="academy_learning.group_academy_admin">
+                    <group>
+                        <field name="allow_self_enroll"/>
+                        <field name="total_duration" readonly="1"/>
+                        <field name="active_enrollment_count" readonly="1"/>
+                        <field name="average_completion_ratio" widget="percentpie" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="academy_section_ids" context="{'default_channel_id': active_id}">
+                            <tree editable="bottom" create="false">
+                                <field name="sequence" widget="handle"/>
+                                <field name="name"/>
+                                <field name="estimated_duration"/>
+                                <field name="content_ids" widget="many2many_tags" readonly="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group>
+                        <field name="academy_enrollment_ids" string="Enrollments">
+                            <tree>
+                                <field name="user_id"/>
+                                <field name="state"/>
+                                <field name="completion_ratio" widget="percentpie"/>
+                                <field name="time_spent"/>
+                                <field name="completed_on"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
