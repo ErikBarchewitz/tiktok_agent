@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_course_course_user,access_course_course_user,model_course_course,base.group_user,1,1,1,1
-access_course_content_user,access_course_content_user,model_course_content,base.group_user,1,1,1,1
-access_course_attendee_user,access_course_attendee_user,model_course_attendee,base.group_user,1,1,1,1
-access_course_content_template_user,access_course_content_template_user,model_course_content_template,base.group_user,1,1,1,1
-access_course_course_tag_user,access_course_course_tag_user,model_course_course_tag,base.group_user,1,1,1,1
