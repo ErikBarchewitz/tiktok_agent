@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_slide_content_template_user,access_slide_content_template_user,model_slide_content_template,base.group_user,1,1,1,1
-access_slide_content_template_manager,access_slide_content_template_manager,model_slide_content_template,base.group_system,1,1,1,1
