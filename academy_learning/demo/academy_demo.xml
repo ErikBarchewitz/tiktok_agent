@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="academy_demo_course" model="slide.channel">
+            <field name="name">Demo Academy Course</field>
+            <field name="allow_self_enroll" eval="True"/>
+            <field name="is_published" eval="True"/>
+        </record>
+
+        <record id="academy_demo_section_intro" model="academy.course.section">
+            <field name="name">Getting Started</field>
+            <field name="channel_id" ref="academy_learning.academy_demo_course"/>
+            <field name="sequence" eval="1"/>
+        </record>
+
+        <record id="academy_demo_slide_article" model="slide.slide">
+            <field name="name">Welcome to the Academy</field>
+            <field name="channel_id" ref="academy_learning.academy_demo_course"/>
+            <field name="slide_type">document</field>
+            <field name="description">&lt;p&gt;This demo illustrates the Academy Learning player.&lt;/p&gt;</field>
+            <field name="is_published" eval="True"/>
+        </record>
+
+        <record id="academy_demo_content_article" model="academy.course.content">
+            <field name="slide_id" ref="academy_learning.academy_demo_slide_article"/>
+            <field name="section_id" ref="academy_learning.academy_demo_section_intro"/>
+            <field name="content_kind">markdown</field>
+            <field name="sequence" eval="1"/>
+            <field name="player_message">&lt;p&gt;Enjoy your journey!&lt;/p&gt;</field>
+        </record>
+
+        <record id="academy_demo_quiz" model="academy.quiz">
+            <field name="name">Intro Quiz</field>
+            <field name="passing_score" eval="1"/>
+        </record>
+
+        <record id="academy_demo_quiz_question" model="academy.quiz.question">
+            <field name="quiz_id" ref="academy_learning.academy_demo_quiz"/>
+            <field name="name">Did you read the welcome message?</field>
+            <field name="question_type">single</field>
+            <field name="score" eval="1"/>
+        </record>
+
+        <record id="academy_demo_quiz_answer_yes" model="academy.quiz.answer">
+            <field name="question_id" ref="academy_learning.academy_demo_quiz_question"/>
+            <field name="name">Yes</field>
+            <field name="is_correct" eval="True"/>
+        </record>
+
+        <record id="academy_demo_quiz_answer_no" model="academy.quiz.answer">
+            <field name="question_id" ref="academy_learning.academy_demo_quiz_question"/>
+            <field name="name">Not yet</field>
+        </record>
+
+        <record id="academy_demo_slide_quiz" model="slide.slide">
+            <field name="name">Check Your Knowledge</field>
+            <field name="channel_id" ref="academy_learning.academy_demo_course"/>
+            <field name="slide_type">quiz</field>
+            <field name="is_published" eval="True"/>
+        </record>
+
+        <record id="academy_demo_content_quiz" model="academy.course.content">
+            <field name="slide_id" ref="academy_learning.academy_demo_slide_quiz"/>
+            <field name="section_id" ref="academy_learning.academy_demo_section_intro"/>
+            <field name="content_kind">quiz</field>
+            <field name="quiz_id" ref="academy_learning.academy_demo_quiz"/>
+            <field name="sequence" eval="2"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="academy_course_content_tree" model="ir.ui.view">
+        <field name="name">academy.course.content.tree</field>
+        <field name="model">academy.course.content</field>
+        <field name="arch" type="xml">
+            <tree string="Course Content">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="section_id"/>
+                <field name="channel_id" invisible="1"/>
+                <field name="content_kind"/>
+                <field name="quiz_id"/>
+                <field name="survey_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="academy_course_content_form" model="ir.ui.view">
+        <field name="name">academy.course.content.form</field>
+        <field name="model">academy.course.content</field>
+        <field name="arch" type="xml">
+            <form string="Content">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="section_id"/>
+                        <field name="content_kind"/>
+                        <field name="quiz_id" attrs="{'required': [('content_kind', '=', 'quiz')], 'readonly': [('content_kind', '!=', 'quiz')]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="question_count"/>
+                            </tree>
+                        </field>
+                        <field name="survey_id" attrs="{'required': [('content_kind', '=', 'survey')], 'readonly': [('content_kind', '!=', 'survey')]}">
+                            <tree>
+                                <field name="title"/>
+                            </tree>
+                        </field>
+                        <field name="allow_download"/>
+                    </group>
+                    <group>
+                        <field name="slide_id" context="{'default_channel_id': section_id.channel_id}"/>
+                        <field name="player_message" widget="html"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="academy_course_content_action" model="ir.actions.act_window">
+        <field name="name">Content</field>
+        <field name="res_model">academy.course.content</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

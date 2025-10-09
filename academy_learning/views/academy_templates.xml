@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="academy_course_player" name="Academy Course Player" inherit_id="website.layout">
+        <xpath expr="//main" position="inside">
+            <t t-if="request.env.user.has_group('academy_learning.group_academy_user')">
+                <div class="academy-player" t-call="academy_learning.academy_course_player_inner"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="academy_course_player_inner" name="Player Inner">
+        <t t-set="course" t-value="request.env['slide.channel'].browse(int(request.params.get('course_id', 0)))"/>
+        <t t-if="course">
+            <div class="academy-player__header">
+                <h1 class="academy-player__title" t-esc="course.name"/>
+                <div class="academy-player__progress">
+                    <span t-esc="'%.0f%%' % (course.average_completion_ratio * 100)"/>
+                </div>
+            </div>
+            <div class="academy-player__body">
+                <aside class="academy-player__sidebar">
+                    <ul class="academy-player__outline">
+                        <t t-foreach="course.academy_section_ids" t-as="section">
+                            <li class="academy-player__outline-section">
+                                <h3 t-esc="section.name"/>
+                                <ul>
+                                    <t t-foreach="section.content_ids" t-as="content">
+                                        <li>
+                                            <a t-attf-href="/academy/content/{content.id}" t-esc="content.name"/>
+                                        </li>
+                                    </t>
+                                </ul>
+                            </li>
+                        </t>
+                    </ul>
+                </aside>
+                <section class="academy-player__content">
+                    <t t-call="academy_learning.academy_course_content_inner"/>
+                </section>
+            </div>
+        </t>
+        <t t-else="">
+            <div class="alert alert-info">Course not found or access denied.</div>
+        </t>
+    </template>
+
+    <template id="academy_course_content_inner" name="Player Content Inner">
+        <t t-set="content" t-value="request.env['academy.course.content'].browse(int(request.params.get('content_id', 0)))"/>
+        <t t-if="content">
+            <div class="academy-content">
+                <h2 class="academy-content__title" t-esc="content.name"/>
+                <div class="academy-content__message" t-if="content.player_message" t-raw="content.player_message"/>
+                <t t-if="content.content_kind == 'markdown'">
+                    <div class="academy-content__body" t-raw="content.slide_id.description"/>
+                </t>
+                <t t-elif="content.content_kind == 'video'">
+                    <div class="academy-content__video">
+                        <iframe t-att-src="content.slide_id.video_url" allowfullscreen="1"/>
+                    </div>
+                </t>
+                <t t-elif="content.content_kind == 'file'">
+                    <div class="academy-content__file">
+                        <a class="btn btn-primary" t-att-href="'/web/content/%s?download=1' % content.slide_id.attachment_id.id">
+                            Download File
+                        </a>
+                    </div>
+                </t>
+                <t t-elif="content.content_kind == 'image'">
+                    <img class="img-fluid" t-att-src="'/web/image/%s' % content.slide_id.attachment_id.id"/>
+                </t>
+                <t t-elif="content.content_kind == 'quiz'">
+                    <t t-call="academy_learning.academy_quiz_player"/>
+                </t>
+                <t t-elif="content.content_kind == 'survey'">
+                    <t t-if="content.survey_id">
+                        <iframe t-att-src="'/survey/start/%s' % content.survey_id.access_token"/>
+                    </t>
+                    <t t-else="">
+                        <div class="alert alert-warning">Survey not linked.</div>
+                    </t>
+                </t>
+            </div>
+        </t>
+        <t t-else="">
+            <div class="alert alert-info">Content not found.</div>
+        </t>
+    </template>
+
+    <template id="academy_quiz_player" name="Quiz Player">
+        <t t-set="quiz" t-value="request.env['academy.course.content'].browse(int(request.params.get('content_id', 0))).quiz_id"/>
+        <t t-if="quiz">
+            <form class="academy-quiz" t-att-action="'/academy/quiz/%s' % quiz.id" method="post">
+                <t t-foreach="quiz.question_ids" t-as="question">
+                    <div class="academy-quiz__question">
+                        <h4 t-esc="question.name"/>
+                        <t t-if="question.question_type in ('single', 'multiple', 'boolean')">
+                            <t t-foreach="question.option_ids" t-as="option">
+                                <label class="academy-quiz__option">
+                                    <input type="checkbox" name="q%s" t-att-value="option.id"/>
+                                    <span t-esc="option.name"/>
+                                </label>
+                            </t>
+                        </t>
+                        <t t-else="">
+                            <textarea name="q%s" class="form-control" t-att-value="question.id"/>
+                        </t>
+                    </div>
+                </t>
+                <div class="academy-quiz__footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </t>
+        <t t-else="">
+            <div class="alert alert-info">Quiz configuration incomplete.</div>
+        </t>
+    </template>
+    <template id="academy_quiz_result" name="Quiz Result" inherit_id="website.layout">
+        <xpath expr="//main" position="inside">
+            <div class="academy-quiz-result">
+                <h1>Quiz Result</h1>
+                <p t-esc="message"/>
+                <p>
+                    <strong>Score:</strong>
+                    <span t-esc="'%.0f / %.0f' % (attempt.score, attempt.max_score)"/>
+                </p>
+                <p t-if="course_id">
+                    <a t-attf-href="/academy/course/{course_id}?content_id={content_id}" class="btn btn-primary">Back to course</a>
+                </p>
+            </div>
+        </xpath>
+    </template>
+</odoo>
