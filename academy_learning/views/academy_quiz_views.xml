@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="academy_quiz_view_tree" model="ir.ui.view">
+        <field name="name">academy.quiz.list</field>
+        <field name="model">academy.quiz</field>
+        <field name="arch" type="xml">
+            <list string="Quizze">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="passing_score"/>
+                <field name="attempts_allowed"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="academy_quiz_view_form" model="ir.ui.view">
+        <field name="name">academy.quiz.form</field>
+        <field name="model">academy.quiz</field>
+        <field name="arch" type="xml">
+            <form string="Quiz">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="course_id"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="passing_score"/>
+                            <field name="attempts_allowed"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Einleitung">
+                            <field name="introduction" widget="html"/>
+                        </page>
+                        <page string="Fragen">
+                            <field name="question_ids">
+                                <list editable="bottom" string="Fragen">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="question_type"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="academy_quiz_question_view_form" model="ir.ui.view">
+        <field name="name">academy.quiz.question.form</field>
+        <field name="model">academy.quiz.question</field>
+        <field name="arch" type="xml">
+            <form string="Quizfrage">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="quiz_id"/>
+                            <field name="question_type"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="explanation" widget="text"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Antworten">
+                            <field name="answer_ids">
+                                <list editable="bottom" string="Antworten">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="is_correct" widget="boolean_toggle"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="academy_quiz_question_view_tree" model="ir.ui.view">
+        <field name="name">academy.quiz.question.list</field>
+        <field name="model">academy.quiz.question</field>
+        <field name="arch" type="xml">
+            <list string="Quizfragen">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="quiz_id"/>
+                <field name="question_type"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="academy_quiz_answer_view_tree" model="ir.ui.view">
+        <field name="name">academy.quiz.answer.list</field>
+        <field name="model">academy.quiz.answer</field>
+        <field name="arch" type="xml">
+            <list string="Antworten">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="question_id"/>
+                <field name="is_correct"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="academy_quiz_answer_view_form" model="ir.ui.view">
+        <field name="name">academy.quiz.answer.form</field>
+        <field name="model">academy.quiz.answer</field>
+        <field name="arch" type="xml">
+            <form string="Antwort">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="question_id"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="is_correct"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="academy_quiz_view_search" model="ir.ui.view">
+        <field name="name">academy.quiz.search</field>
+        <field name="model">academy.quiz</field>
+        <field name="arch" type="xml">
+            <search string="Quizze">
+                <field name="name"/>
+                <field name="course_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="academy_quiz_action" model="ir.actions.act_window">
+        <field name="name">Quizze</field>
+        <field name="res_model">academy.quiz</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="academy_quiz_view_search"/>
+    </record>
+
+    <record id="academy_question_action" model="ir.actions.act_window">
+        <field name="name">Quizfragen</field>
+        <field name="res_model">academy.quiz.question</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
