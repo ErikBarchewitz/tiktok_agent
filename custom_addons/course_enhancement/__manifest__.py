@@ -16,7 +16,8 @@
         "views/slide_channel_views.xml",
         "views/slide_channel_partner_views.xml",
         "views/slide_slide_views.xml",
-        "views/slide_content_template_views.xml"
+        "views/slide_content_template_views.xml",
+        "views/survey_survey_views.xml"
     ],
     "installable": True,
     "application": True,

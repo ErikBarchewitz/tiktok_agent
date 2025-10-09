@@ -6,6 +6,14 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="template_id" options="{'no_create': False}"/>
+                <field name="survey_id" attrs="{'invisible': [('slide_category', '!=', 'quiz')]}"/>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_sync_survey_questions"
+                        type="object"
+                        string="Umfrage synchronisieren"
+                        class="btn-primary"
+                        attrs="{'invisible': ['|', ('survey_id', '=', False), ('slide_category', '!=', 'quiz')]}"/>
             </xpath>
         </field>
     </record>
@@ -17,6 +25,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="template_id"/>
+                <field name="survey_id" attrs="{'column_invisible': [('slide_category', '!=', 'quiz')]}"/>
             </xpath>
         </field>
     </record>
